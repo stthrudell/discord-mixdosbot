@@ -1,14 +1,13 @@
 import { Message } from "discord.js";
 import { Client } from "discord.js";
-import { IObserver } from "../IObserver";
+import IEventMessage from "../interfaces/IEventMessage";
+import { IObserver } from "../interfaces/IObserver";
 
-class HelpObserver implements IObserver {
+export default class HelpObserver implements IObserver {
     event: string = "help";
 
-    async callback(message: Message): Promise<any> {
-      message.channel.send("Help é minha caceta");
+    async callback(eventMessage: IEventMessage): Promise<any> {
+      eventMessage.message.channel.send("Help é minha caceta");
       return;
     }
 }
-
-export default new HelpObserver();
