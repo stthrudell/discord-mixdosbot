@@ -4,13 +4,14 @@ import { IObserver } from "../interfaces/IObserver";
 import MixConfig from "../models/MixConfig";
 import MixObserver from "./MixObserver";
 import discordApplication from "../main";
+import EndMixObserver from "./EndMixObserver";
 
 
 export default class MixConfigObserver implements IObserver {
     event: string = "mix";
     readonly emotis: string[] = ['0️⃣', '1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣', '7️⃣', '8️⃣', '9️⃣', '🔟'];
 
-    private channels: any = {
+    public channels: any = {
       logsChannel: false,
       waitingChannel: false,
       teamOneChannel: false,
@@ -63,14 +64,17 @@ export default class MixConfigObserver implements IObserver {
 
       const mixConfig = new MixConfig(
         this.channels.logsChannel as TextChannel,
-        this.channels.watingChannel as VoiceChannel,
-        this.channels.temOneChannel as VoiceChannel,
-        this.channels.temTwoChannel as VoiceChannel,
+        this.channels.waitingChannel as VoiceChannel,
+        this.channels.teamOneChannel as VoiceChannel,
+        this.channels.teamTwoChannel as VoiceChannel,
       );
 
       const mixObserver = new MixObserver(mixConfig);
+      const endMixObserver = new EndMixObserver(mixConfig)
 
       discordApplication.bus.register(mixObserver);
+      discordApplication.bus.register(endMixObserver);
+
       discordApplication.bus.remove(this);
     }
 

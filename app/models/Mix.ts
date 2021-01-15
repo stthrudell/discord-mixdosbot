@@ -4,11 +4,11 @@ export class Mix {
     
     public readonly allMaps: string[] = ['Mirage', 'Inferno', 'Cache', 'Overpass', 'Train', 'Vertigo'];
 
-    private players: GuildMember[];
-    private teamOne: GuildMember[];
-    private teamTwo: GuildMember[];
-    private maps: string[];
-    private md3: boolean;
+    public players: GuildMember[];
+    public teamOne: GuildMember[];
+    public teamTwo: GuildMember[];
+    public maps: string[];
+    public md3: boolean;
 
     constructor(players?: GuildMember[], md3?: boolean) {
         this.players = players || [];
@@ -19,7 +19,10 @@ export class Mix {
     }
 
     public addPlayer (player: GuildMember) {
-        this.players.push(player);
+        console.log(this.players.includes(player))
+
+        if(!this.players.includes(player))
+            this.players.push(player);
     }
 
     public removePlayer (player: GuildMember) {
@@ -28,12 +31,17 @@ export class Mix {
 
     public createTeams () {
         this.players = this.players.sort(() => Math.random() - 0.5);
-        this.teamOne = this.players.slice(0, this.players.length / 2);
-        this.teamTwo = this.players.slice((this.players.length / 2) + 1, this.players.length);
+        this.teamOne = this.players.slice(0, (this.players.length / 2) - 1);
+        this.teamTwo = this.players.slice((this.players.length / 2) , -1);
+        return [this.teamOne, this.teamTwo];
     }
 
-    public selectMaps(maps: string[]) {
+    public selectedMaps(maps: string[]) {
         this.maps = maps;
+    }
+
+    public end() {
+        
     }
     
 }

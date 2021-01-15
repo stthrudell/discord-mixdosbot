@@ -6,9 +6,6 @@ export default class MixConfig {
     public teamOneChannel: VoiceChannel;
     public teamTwoChannel: VoiceChannel;
 
-    // public onWatingChannelEnter: Function;
-    // public onWatingChannelLeave: Function;
-
     constructor(
         logsChannel: TextChannel,
         waitingChannel: VoiceChannel,
@@ -19,13 +16,5 @@ export default class MixConfig {
         this. waitingChannel = waitingChannel;
         this. teamOneChannel = teamOneChannel;
         this. teamTwoChannel = teamTwoChannel;
-        // // Main
-        // const main 
-
-        // on.('', () => {
-        //     // if
-        //         this.onWatingChannelEnter(user);
-        //         this.onWatingChannelLeave(user);
-        // });
     }
 }
