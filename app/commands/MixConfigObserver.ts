@@ -32,11 +32,11 @@ export default class MixConfigObserver implements IObserver {
         getChannels: (collection: Collection<string, GuildChannel>) => {
           return MixConfigObserver.getChannelsByTypeFromCollection(collection, "text");
         },
-        configMessage: 'Escolha o canal de texto para gerenciar o mix: ',
+        configMessage: 'Escolha o canal de texto para o Prata I aqui poder mandar os logs dos mix: ',
       },
       waitingChannel: {
         getChannels: MixConfigObserver.getChannelsByTypeFromCollection,
-        configMessage: 'Escolha o canal de voz onde os players irão aguardar o mix: ',
+        configMessage: 'Escolha o canal de voz onde os bots (players) irão aguardar o mix: ',
       },
       teamOneChannel: {
         getChannels: MixConfigObserver.getChannelsByTypeFromCollection,
@@ -92,7 +92,7 @@ export default class MixConfigObserver implements IObserver {
       const configMessage = channelConfig.configMessage;
 
       const channelsOptions: string = channels.reduce((acc: string, value: GuildChannel, index: number) => {
-        return acc += `${this.emotis[index]} - ${value.name}\n`;
+        return acc += `\n${this.emotis[index]} - ${value.name}`;
       }, configMessage + "\n");
 
       const message = await channelLog.send(`
