@@ -9,7 +9,25 @@ import EndMixObserver from "./EndMixObserver";
 
 export default class MixConfigObserver implements IObserver {
     event: string = "mix";
-    readonly emotis: string[] = ['0️⃣', '1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣', '7️⃣', '8️⃣', '9️⃣', '🔟'];
+    readonly emotis: string[] = ['0️⃣', '1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣', '7️⃣', '8️⃣', '9️⃣', '🔟', '😀', 
+    '😁',  
+    '😂', 
+    '🤣', 
+    '😃', 
+    '😄', 
+    '😅', 
+    '😆', 
+    '😉', 
+    '😊', 
+    '😋', 
+    '😎',  
+    '😍',
+    '😘', 
+    '😗', 
+    '😙', 
+    '😚', 
+    '🙂', 
+    '🤗'];
 
     public channels: any = {
       logsChannel: false,
@@ -91,7 +109,7 @@ export default class MixConfigObserver implements IObserver {
 
       const configMessage = channelConfig.configMessage;
 
-      const channelsOptions: string = channels.reduce((acc: string, value: GuildChannel, index: number) => {
+      const channelsOptions: string = channels.reduce((acc: string, value: GuildChannel, index: number) => {        
         return acc += `\n${this.emotis[index]} - ${value.name}`;
       }, configMessage + "\n");
 
@@ -99,7 +117,7 @@ export default class MixConfigObserver implements IObserver {
       \`\`\` ${channelsOptions} \`\`\`
       `);
 
-      for (let i = 0; i < channels.length; i++) {
+      for (let i = 0; i <= channels.length; i++) {
         await message.react(this.emotis[i]);
       }
 

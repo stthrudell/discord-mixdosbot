@@ -18,6 +18,10 @@ export class Mix {
         this.md3 = md3 || false;
     }
 
+    public clearPlayers () {
+        this.players = [];
+    }
+
     public addPlayer (player: GuildMember) {
         console.log(this.players.includes(player))
 
@@ -29,16 +33,17 @@ export class Mix {
         this.players = this.players.filter(v => v != player);
     }   
 
-    public createTeams () {
+    public async createTeams() {
         this.players = this.players.sort(() => Math.random() - 0.5);
-        this.teamOne = this.players.slice(0, (this.players.length / 2) - 1);
-        this.teamTwo = this.players.slice((this.players.length / 2) , -1);
+        this.teamOne = this.players.slice(0, 5);
+        this.teamTwo = this.players.slice(5 , 10);
         return [this.teamOne, this.teamTwo];
     }
 
     public selectedMaps(maps: string[]) {
         this.maps = maps;
     }
+    
 
     public end() {
         

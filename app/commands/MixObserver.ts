@@ -31,10 +31,12 @@ export default class MixObserver implements IObserver {
         
         this.channel = message.channel;
 
-        if(this.mixConfig.waitingChannel.members.size < 8) {
+        if(this.mixConfig.waitingChannel.members.size <= 9) {
             message.channel.send("Tem que ter pelo menos 10 BOT's pra começar o mix, amigo!");
             return;
         }
+
+        this.mix.clearPlayers();
 
         this.mixConfig.waitingChannel.members.map( (member: GuildMember) => {
             this.mix.addPlayer(member);
@@ -139,7 +141,7 @@ export default class MixObserver implements IObserver {
                 msg += '\n ' + player.displayName;
             } )
         })
-        msg += 'Good luck & have fun!';
+        msg += '\n\nGood luck & have fun!';
 
         this.channel?.send(`
             \`\`\` ${msg} \`\`\`
