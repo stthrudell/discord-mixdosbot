@@ -14,8 +14,11 @@ class DiscordApplication {
 
   constructor (token: string) {
     this._client.login(token).then(() => {
-      console.log("Bot iniciado!");
+      console.log("Bot iniciado!");      
+      this._client.user?.setActivity('!mix', {type: "PLAYING"})
     });
+
+
     this.registerCommands();
     this._client.on('message', (message: Message) => {
       this.handleMessage(message);

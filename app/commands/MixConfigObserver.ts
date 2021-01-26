@@ -117,7 +117,7 @@ export default class MixConfigObserver implements IObserver {
       \`\`\` ${channelsOptions} \`\`\`
       `);
 
-      for (let i = 0; i <= channels.length; i++) {
+      for (let i = 0; i < channels.length; i++) {
         await message.react(this.emotis[i]);
       }
 

@@ -1,4 +1,3 @@
-import { Message } from "discord.js";
 import IEventMessage from "./interfaces/IEventMessage";
 import { IObserver } from "./interfaces/IObserver";
 
