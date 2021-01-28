@@ -3,7 +3,7 @@ import IEventMessage from "../interfaces/IEventMessage";
 import { IObserver } from "../interfaces/IObserver";
 import { Mix } from "../models/Mix";
 import MixConfig from "../models/MixConfig";
-import User from "../models/User";
+import Server from "../models/Server";
 
 enum Status {
     WAITING
@@ -22,20 +22,13 @@ export default class MixObserver implements IObserver {
     private mapsVoted: any = [];
     private mixConfig: MixConfig;
     private channel?: TextChannel | DMChannel | NewsChannel;
+    private server: Server = new Server();    
 
     constructor (mixConfig: MixConfig) {
         this.mixConfig = mixConfig;
     }
 
-    async callback(eventMessage: IEventMessage): Promise<any> {        
-
-        const users = await User.findAll({
-            where: {
-                discordId: 2
-            }
-        });
-        console.log(users)
-        console.log("All users:", JSON.stringify(users, null, 2));
+    async callback(eventMessage: IEventMessage): Promise<any> {
 
         const {message} = eventMessage;
         
@@ -134,16 +127,22 @@ export default class MixObserver implements IObserver {
 
         this.mix.teamOne.map((user: GuildMember) => {
             user.voice.setChannel(this.mixConfig.teamOneChannel);
+            this.server.defineCT(this.mix.teamOne)
         })
 
         this.mix.teamTwo.map((user: GuildMember) => {
-            user.voice.setChannel(this.mixConfig.teamTwoChannel)
+            user.voice.setChannel(this.mixConfig.teamTwoChannel);
+            this.server.defineTR(this.mix.teamTwo);
         })
 
         const mapVoted = this.mapsVoted.sort((a: { count: number; }, b: { count: number; }) => b.count - a.count)
 
         let msg = 'Preparem-se pro mix BOT\'s...';
         msg += '\n\n Mapa: ' + mapVoted[0].map;
+
+        //Mudando o mapa no servidor
+        const mapa = mapVoted[0].map = 'Cobble' ? 'de_cbble_classic' : mapVoted[0].map; 
+        this.server.exec('changelevel '+ mapa)
 
         this.teamsSorted?.map( (team: GuildMember[], index: number) => {
             msg += '\n\n Time BOT#' + team[index].displayName;

@@ -4,7 +4,6 @@ import { Bus } from "./Bus";
 import commands from "./commands";
 import IEventMessage from "./interfaces/IEventMessage";
 import { IObserver } from "./interfaces/IObserver";
-import User from "./models/User";
 import ClearPrefixMessage from "./utils/ClearPrefixMessage";
 
 

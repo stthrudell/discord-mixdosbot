@@ -42,10 +42,6 @@ export class Mix {
 
     public selectedMaps(maps: string[]) {
         this.maps = maps;
-    }    
-
-    public end() {
-        
     }
     
 }

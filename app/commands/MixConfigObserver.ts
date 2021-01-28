@@ -1,3 +1,4 @@
+require('dotenv');
 import { Message, Client, VoiceChannel, TextChannel, GuildChannel, Collection } from "discord.js";
 import IEventMessage from "../interfaces/IEventMessage";
 import { IObserver } from "../interfaces/IObserver";
@@ -5,6 +6,8 @@ import MixConfig from "../models/MixConfig";
 import MixObserver from "./MixObserver";
 import discordApplication from "../main";
 import EndMixObserver from "./EndMixObserver";
+import Server from '../models/Server'
+import fs from 'fs';
 
 
 export default class MixConfigObserver implements IObserver {
