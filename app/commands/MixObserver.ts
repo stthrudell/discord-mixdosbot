@@ -3,6 +3,7 @@ import IEventMessage from "../interfaces/IEventMessage";
 import { IObserver } from "../interfaces/IObserver";
 import { Mix } from "../models/Mix";
 import MixConfig from "../models/MixConfig";
+import User from "../models/User";
 
 enum Status {
     WAITING
@@ -26,7 +27,16 @@ export default class MixObserver implements IObserver {
         this.mixConfig = mixConfig;
     }
 
-    async callback(eventMessage: IEventMessage): Promise<any> {
+    async callback(eventMessage: IEventMessage): Promise<any> {        
+
+        const users = await User.findAll({
+            where: {
+                discordId: 2
+            }
+        });
+        console.log(users)
+        console.log("All users:", JSON.stringify(users, null, 2));
+
         const {message} = eventMessage;
         
         this.channel = message.channel;

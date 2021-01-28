@@ -4,6 +4,7 @@ import { Bus } from "./Bus";
 import commands from "./commands";
 import IEventMessage from "./interfaces/IEventMessage";
 import { IObserver } from "./interfaces/IObserver";
+import User from "./models/User";
 import ClearPrefixMessage from "./utils/ClearPrefixMessage";
 
 
@@ -13,11 +14,10 @@ class DiscordApplication {
   readonly commandPrefix: string = "!";
 
   constructor (token: string) {
-    this._client.login(token).then(() => {
+    this._client.login(token).then(async () => {
       console.log("Bot iniciado!");      
       this._client.user?.setActivity('!mix', {type: "PLAYING"})
     });
-
 
     this.registerCommands();
     this._client.on('message', (message: Message) => {

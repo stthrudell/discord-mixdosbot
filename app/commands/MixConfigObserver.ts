@@ -67,6 +67,7 @@ export default class MixConfigObserver implements IObserver {
     }
 
     async callback(eventMessage: IEventMessage): Promise<any> {
+
       const channelLog = eventMessage.message.channel;
       const serverChannels = eventMessage.message.guild?.channels.cache;
       for (let channel in this.channels) {
@@ -101,6 +102,7 @@ export default class MixConfigObserver implements IObserver {
       channelLog: TextChannel,
       serverChannels: Collection<string, GuildChannel>
     ): Promise<TextChannel | VoiceChannel> {
+
       const channelConfig = this.channelsConfig[channel];
 
       const channels = channelConfig
