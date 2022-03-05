@@ -56,13 +56,17 @@ export default class Server {
     }
 
     private async save_exec() {
-        fs.writeFile(process.env.SV_EXEC_CFG || '', this.commands_exec, function(err){
-            if(err){
-              return console.log('erro', err)
-            }
-            console.log('Arquivo Criado');
-            return true;
-        });
+        fs.writeFile(
+			process.env.SV_EXEC_CFG || `${__dirname}/../logs/server_exec.log`,
+			this.commands_exec,
+			function (err) {
+				if (err) {
+					return console.log("erro", err);
+				}
+				console.log("Arquivo Criado");
+				return true;
+			}
+		);
     }
 }
 
