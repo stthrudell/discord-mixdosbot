@@ -21,6 +21,7 @@
     "@typeit/discord": "^4.0.8",
     "discord.js": "^12.5.1",
     "dotenv": "^8.2.0",
+    "mongoose": "^6.2.4",
     "node-pre-gyp": "^0.17.0",
     "nodemon": "^2.0.7",
     "rcon-srcds": "^2.0.1",

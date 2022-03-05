@@ -18,28 +18,28 @@ class User extends Model {
 
 }
 
-User.init(
-  {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-      allowNull: false,
-    },
-    discordId: {
-      type: DataTypes.STRING,
-      allowNull: false,        
-    },
-    steamId: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-  },
-  {
-    sequelize: database, // passing the `sequelize` instance is required,
-    tableName: 'users',
-  }
-)
+// User.init(
+//   {
+//     id: {
+//       type: DataTypes.INTEGER,
+//       primaryKey: true,
+//       autoIncrement: true,
+//       allowNull: false,
+//     },
+//     discordId: {
+//       type: DataTypes.STRING,
+//       allowNull: false,        
+//     },
+//     steamId: {
+//       type: DataTypes.STRING,
+//       allowNull: false,
+//     },
+//   },
+//   {
+//     sequelize: database, // passing the `sequelize` instance is required,
+//     tableName: 'users',
+//   }
+// )
 
 // User.sync({force: true}).then(() => {
 //   return User.create({    
