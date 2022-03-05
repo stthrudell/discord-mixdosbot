@@ -45,9 +45,9 @@ export default class MixObserver implements IObserver {
 
 		this.channel = message.channel;
 
-		if (this.mixConfig.waitingChannel.members.size <= 0) {
+		if (this.mixConfig.waitingChannel.members.size <= 9) {
 			message.channel.send(
-				"Tem que ter pelo menos 10 BOT's pra começar o mix, amigo!"
+				`Tem que ter pelo menos 10 BOT's na sala "${this.mixConfig.waitingChannel.name}" pra começar o mix, amigo!`
 			);
 			return;
 		}
