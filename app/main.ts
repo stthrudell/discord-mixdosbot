@@ -34,19 +34,22 @@ class DiscordApplication {
   }
 
   private handleMessage(message: Message) {
-    const { content } = message;
-    const [command, args] = ClearPrefixMessage.clear(message.content, this.commandPrefix);
-    const eventMessage: IEventMessage = {
-      message,
-      command: (command as string),
-      args: (args as string[])
-    }
+    const { content, channel } = message;
+	const [command, args] = ClearPrefixMessage.clear(
+		message.content,
+		this.commandPrefix
+	);
+	const eventMessage: IEventMessage = {
+		message,
+		command: command as string,
+		args: args as string[],
+	};
 
-    if (content.startsWith(this.commandPrefix)) {
-      const splited = content.replace(this.commandPrefix, "").split(" ");
-      const command = splited[0];
-      this.bus.notify(command.toLowerCase(), eventMessage);
-    }
+	if (content.startsWith(this.commandPrefix) && channel.type == "text") {
+		const splited = content.replace(this.commandPrefix, "").split(" ");
+		const command = splited[0];
+		this.bus.notify(command.toLowerCase(), eventMessage);
+	}
   }
 }
 
