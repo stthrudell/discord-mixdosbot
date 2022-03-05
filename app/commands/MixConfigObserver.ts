@@ -146,6 +146,7 @@ export default class MixConfigObserver implements IObserver {
 		discordApplication.bus.register(endMixObserver);
 
 		discordApplication.bus.remove(this);
+        discordApplication.bus.notify("mix", eventMessage);
 	}
 
 	private async sendConfig(
