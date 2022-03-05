@@ -96,7 +96,9 @@ export default class MixConfigObserver implements IObserver {
 
 	async callback(eventMessage: IEventMessage): Promise<any> {
 		const serverId = eventMessage.message.guild?.id;
-		let mixConfigModel = await MixConfigModel.findOne();
+		let mixConfigModel = await MixConfigModel.findOne({
+			guildId: serverId,
+		});
 
 		const channelLog = eventMessage.message.channel;
 		const serverChannels = eventMessage.message.guild?.channels.cache;
