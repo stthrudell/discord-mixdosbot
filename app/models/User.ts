@@ -1,52 +1,15 @@
-import { Model, DataTypes } from 'sequelize'
-import { database } from '../database'
-  
+import { database } from "../database";
+
 export interface UserInterface {
-  id: number
-  discordId: string
-  steamId: string
+	discordId: string;
+	steamId: string;
 }
 
-class User extends Model {
+export const UserSchema = new database.Schema({
+	discordId: String,
+	steamId: String,
+});
 
-  public id!: number
-  public discordId!: string
-  public steamId!: string
+const User = database.model("User", UserSchema);
 
-  public readonly createdAt!: Date
-  public readonly updatedAt!: Date
-
-}
-
-// User.init(
-//   {
-//     id: {
-//       type: DataTypes.INTEGER,
-//       primaryKey: true,
-//       autoIncrement: true,
-//       allowNull: false,
-//     },
-//     discordId: {
-//       type: DataTypes.STRING,
-//       allowNull: false,        
-//     },
-//     steamId: {
-//       type: DataTypes.STRING,
-//       allowNull: false,
-//     },
-//   },
-//   {
-//     sequelize: database, // passing the `sequelize` instance is required,
-//     tableName: 'users',
-//   }
-// )
-
-// User.sync({force: true}).then(() => {
-//   return User.create({    
-//     discordId: '1231a',
-//     steamId: 'steam1',
-//   });
-// });
-
-export default User
-  
+export default User;

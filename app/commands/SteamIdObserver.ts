@@ -14,10 +14,8 @@ export default class PingObserver implements IObserver {
         
         if(!steamId){
             const user = await User.findOne({
-                where: {
-                    discordId: userId
-                }
-            });
+				discordId: userId,
+			});
 
             if(user) {
                 eventMessage.message.channel.send(`${userAuthor} seu steam id é ${user?.steamId}`);
@@ -30,18 +28,18 @@ export default class PingObserver implements IObserver {
         } else {
 
             const user = await User.findOne({
-                where: {
-                    steamId: steamId
-                }
+                discordId: userId,
             });
 
             if(user) {
                 eventMessage.message.channel.send(`${userAuthor} esta steam id já esta cadastrada.`);
             } else {
-                await User.create({
+                const user = await User.create({
                     discordId: userId,
                     steamId: steamId
                 })
+                await user.save();
+                
                 eventMessage.message.channel.send(`${userAuthor} SteamID cadastrado com sucesso!`);
             }            
         }
